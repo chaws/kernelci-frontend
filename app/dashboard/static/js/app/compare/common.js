@@ -29,6 +29,7 @@ define([
     var gJobData;
     var gKernelData;
     var gLabData;
+    var gCompilerData;
 
     gCommonCompare = {};
 
@@ -60,6 +61,13 @@ define([
         title: 'Choose an architecture',
         pattern: '[xarm468-_]*',
         focusEvent: cevents.archInputFocus
+    };
+
+    gCompilerData = {
+        label: 'Compiler',
+        title: 'Choose a compiler',
+        pattern: '[a-zA-Z0-9_.-]*',
+        focusEvent: cevents.compilerInputFocus
     };
 
     gDefconfigData = {
@@ -267,8 +275,10 @@ define([
 
         options.defconfigId = 'compare-defconfig' + options.idx;
         options.archId = 'compare-arch' + options.idx;
+        options.compilerId = 'compare-compiler' + options.idx;
         options.data.defconfig = options.defconfigId;
         options.data.arch = options.archId;
+        options.data.compiler = options.compilerId;
 
         // Start from the base of tree-kernel.
         divNode = createJobMultiChoice(options);
@@ -289,6 +299,14 @@ define([
 
         divNode.appendChild(createInputControl(options));
 
+        // The compiler choice.
+        options.elementId = options.compilerId;
+        Object.keys(gCompilerData).forEach(function(key) {
+            options[key] = gCompilerData[key];
+        });
+
+        divNode.appendChild(createInputControl(options));
+
         return divNode;
     }
 
@@ -302,8 +320,10 @@ define([
 
         options.defconfigId = 'baseline-defconfig';
         options.archId = 'baseline-arch';
+        options.compilerId = 'baseline-compiler';
         options.data.defconfig = options.defconfigId;
         options.data.arch = options.archId;
+        options.data.compiler = options.compilerId;
 
         // Start from the base of tree-kernel.
         divNode = createJobChoice(options);
@@ -320,6 +340,14 @@ define([
         options.elementId = options.archId;
         Object.keys(gArchData).forEach(function(key) {
             options[key] = gArchData[key];
+        });
+
+        divNode.appendChild(createInputControl(options));
+
+        // The compiler choice.
+        options.elementId = options.compilerId;
+        Object.keys(gCompilerData).forEach(function(key) {
+            options[key] = gCompilerData[key];
         });
 
         divNode.appendChild(createInputControl(options));

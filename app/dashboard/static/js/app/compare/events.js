@@ -25,6 +25,7 @@ define([
 ], function($, e, r, html, constants) {
     'use strict';
     var gArchitectureStatus;
+    var gCompilerStatus;
     var gBoardStatus;
     var gCompareEvents;
     var gDataCache;
@@ -51,6 +52,7 @@ define([
 
     gNonValidStrings = {
         arch: 'Specified architecture value is not valid or empty',
+        compiler: 'Specified compiler value is not valid or empty',
         board: 'Specified board value is not valid or empty',
         defconfig: 'Specified defconfig value is not valid or empty',
         kernel: 'Specified kernel value is not valid or empty',
@@ -85,6 +87,15 @@ define([
         },
         '404': {
             content: 'No architecture values found'
+        }
+    };
+
+    gCompilerStatus = {
+        '400': {
+            content: 'Wrong data provided looking for compiler values'
+        },
+        '404': {
+            content: 'No compiler values found'
         }
     };
 
